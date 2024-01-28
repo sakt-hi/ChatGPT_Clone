@@ -1,0 +1,225 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Manrope', sans-serif;
+}
+
+:root{
+    --text-color:#FFFFFF;
+    --icon-color:#ACACBE;
+    --icon-hover-bg:#5B5E71;
+    --placeholder-color:#CCCCCC;
+    --prompt-chat:#343541;
+    --solution-chat:#444654;
+    --prompt-border:#343541;
+    --solution-border:#444654;
+}
+
+.light-mode{
+    --text-color:#343541;
+    --icon-color:#A9A9BC;
+    --icon-hover-bg:#F1F1F3;
+    --placeholder-color:#9F9F9F;
+    --prompt-chat:#FFFFFF;
+    --solution-chat:#F7F7F8;
+    --prompt-border:#FFFFFF;
+    --solution-border:#D9D9E3;
+}
+
+body{
+    background-color: var(--prompt-chat);
+}
+
+/* Chat Container */
+
+.chat-container{
+    max-height: 100vh;
+    padding-bottom: 15px;
+    overflow-y: auto;
+}
+
+:where(.chat-container,textarea)::-webkit-scrollbar{
+    width: 6px;
+}
+
+:where(.chat-container,textarea)::-webkit-scrollbar-track{
+    background: var(--solution-chat);
+    border-radius: 25px;
+}
+
+:where(.chat-container,textarea)::-webkit-scrollbar-thumb{
+    background: var(--icon-color);
+    border-radius: 25px;
+}
+
+.chat{
+    color: var(--text-color);
+    padding: 2.5rem 1rem;
+    display: flex;
+    justify-content: center;
+}
+
+.chat.prompt{
+    background: var(--prompt-chat);
+    border: 1px solid var(--prompt-border);
+}
+
+.chat.solution{
+    background: var(--solution-chat);
+    border: 1px solid var(--solution-border);
+}
+
+.chat-content{
+    display: flex;
+    max-width: 1200px;
+    width: 100%;
+    align-items: flex-start;
+    justify-content: space-between;
+}
+
+.copy-icon{
+    display: flex;
+    font-size: 0.9rem;
+    color: var(--icon-color);
+    gap: 0.1rem;
+    visibility: hidden;
+    cursor: pointer;
+}
+
+.chat:hover .copy-icon{
+    visibility: visible;
+}
+
+.copy-icon span{
+    scale: 0.8;
+}
+
+.chat-details{
+    display: flex;
+    align-items: center;
+}
+
+.chat-details img{
+    width: 35px;
+    height: 35px;
+    align-self: flex-start;
+    object-fit: cover;
+    border-radius: 2px;
+}
+
+.chat-details p{
+    white-space: pre-wrap;
+    font-size: 1.05rem;
+    padding: 0 5rem 0 2.5rem;
+}
+
+.typing-animation{
+    display: inline-flex;
+    padding-left: 2.5rem;
+}
+
+.typing-dot{
+    height: 0.5rem;
+    width: 0.5rem;
+    opacity: 0.7;
+    margin: 0 0.2rem;
+    background-color: var(--text-color);
+    border-radius: 50%;
+    animation: animateDots 1.5s var(--delay) ease-in-out infinite;
+}
+
+
+
+@keyframes animateDots {
+    0%,44%{
+        transform: translateY(0px);
+    }
+    22%{
+        opacity: 0.4;
+        transform: translateY(-6px);
+    }
+    44%{
+        opacity: 0.2;
+    }
+
+}
+
+
+/* Prompt Input container */
+
+.input-container{
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background: var(--prompt-chat);
+    border: 1px solid var(--prompt-border);
+    display: flex;
+    justify-content: center;
+    padding: 2rem 1rem;
+}
+
+.input-content{
+    max-width: 950px;
+    width: 100%;
+    display: flex;
+    align-items: flex-end;
+}
+
+.input-textarea{
+    width: 100%;
+    display: flex;
+    position: relative;
+}
+
+/* send button */
+.input-textarea span{
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    visibility: hidden;
+}
+
+/* prompt textarea */
+textarea{
+    width: 100%;
+    height: 55px;
+    border: none;
+    background: var(--solution-chat);
+    resize: none;
+    color: var(--text-color);
+    outline: 1px solid var(--solution-border);
+    border-radius: 0.4rem;
+    font-size: 1rem;
+    padding: 15px 45px 15px 20px;
+}
+
+textarea::placeholder{
+    color: var(--placeholder-color);
+}
+
+.input-textarea textarea:valid ~ span{
+    visibility: visible;
+}
+
+.input-content span{
+    cursor: pointer;
+    height: 55px;
+    width: 55px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--icon-color);
+}
+
+.input-controls{
+    display: flex;
+}
+
+.input-controls span{
+    background: var(--solution-chat);
+    border: 1px solid var(--solution-border);
+    margin-left: 0.7rem;
+    font-size: 1.4rem;
+    border-radius: 0.4rem;
+}
