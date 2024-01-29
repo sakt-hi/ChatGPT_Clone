@@ -5,7 +5,7 @@ const themeButton = document.querySelector('#theme-btn');
 const deleteButton = document.querySelector('#delete-btn');
 
 let userInput = null;
-const API_KEY = "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";
+const API_KEY = "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";
 const initialHeight = promptInput.scrollHeight;
 
 const loadFromLocalStorage =()=>{
