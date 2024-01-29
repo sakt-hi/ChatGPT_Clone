@@ -5,6 +5,14 @@
     font-family: 'Manrope', sans-serif;
 }
 
+a{
+    text-decoration: none;
+}
+
+html{
+    scroll-behavior: smooth;
+}
+
 :root{
     --text-color:#FFFFFF;
     --icon-color:#ACACBE;
@@ -31,12 +39,98 @@ body{
     background-color: var(--prompt-chat);
 }
 
+.header{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 10vh;
+    position: sticky;
+    top:0;
+    border-bottom: 1px solid var(--solution-border);
+}
+
+.header-content{
+    max-width: 1200px;
+    width: 100%;
+    padding: 0 2rem;
+    display: flex;
+    justify-content: space-between;
+}
+
+.branding{
+    display: flex;
+    gap: 8px;
+}
+
+.branding svg{
+    height: 24px;
+    fill: var(--icon-color);
+}
+
+.branding p{
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--text-color);
+}
+
+.developer{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 6px;
+}
+
+.developer p{
+    font-size: 1rem;
+    font-weight: 400;
+    color: var(--icon-color);
+}
+
+.github-icon{
+    height: 24px;
+    stroke: var(--icon-color);
+}
+
 /* Chat Container */
 
 .chat-container{
-    max-height: 100vh;
+    max-height: 74vh;
     padding-bottom: 15px;
     overflow-y: auto;
+}
+
+.welcome-text{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    height: 70vh;
+    padding: 0 10px;
+    text-align: center;
+    color: var(--text-color);
+}
+
+.welcome-text h1{
+    font-size: 3rem;
+}
+
+.welcome-text h6{
+    font-size: 1.5rem;
+    opacity: 0.6;
+}
+
+.welcome-text p{
+    font-size: 1rem;
+    margin-top: 10px;
+    opacity: 0.6;
+}
+
+.welcome-text small{
+    font-size: 0.9rem;
+    margin-top: 10px;
+    font-weight: lighter;
+    opacity: 0.6;
 }
 
 :where(.chat-container,textarea)::-webkit-scrollbar{
@@ -87,7 +181,7 @@ body{
     cursor: pointer;
 }
 
-.chat:hover .copy-icon{
+.chat:hover .chat-content:not(:has(.typing-animation, .error)) .copy-icon{
     visibility: visible;
 }
 
@@ -98,6 +192,10 @@ body{
 .chat-details{
     display: flex;
     align-items: center;
+}
+
+.chat-details p.error{
+    color: #E55865;
 }
 
 .chat-details img{
@@ -153,7 +251,7 @@ body{
     bottom: 0;
     width: 100%;
     background: var(--prompt-chat);
-    border: 1px solid var(--prompt-border);
+    border-top: 1px solid var(--solution-border);
     display: flex;
     justify-content: center;
     padding: 2rem 1rem;
@@ -184,6 +282,8 @@ body{
 textarea{
     width: 100%;
     height: 55px;
+    max-height: 250px;
+    overflow-y: auto;
     border: none;
     background: var(--solution-chat);
     resize: none;
@@ -222,4 +322,10 @@ textarea::placeholder{
     margin-left: 0.7rem;
     font-size: 1.4rem;
     border-radius: 0.4rem;
+}
+
+@media screen and (max-width: 425px) {
+    .developer p{
+        display: none;
+    }
 }
