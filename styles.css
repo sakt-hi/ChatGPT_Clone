@@ -139,8 +139,19 @@ body{
 .welcome-text small{
     font-size: 0.9rem;
     margin-top: 10px;
-    font-weight: lighter;
+    font-weight: 400;
     opacity: 0.6;
+}
+
+.credits{
+    padding-top: 30px;
+    font-weight: 400;
+    color: var(--icon-color);
+}
+
+.credits a{
+    text-decoration: underline;
+    color: var(--icon-color);
 }
 
 :where(.chat-container,textarea)::-webkit-scrollbar{

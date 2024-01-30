@@ -20,6 +20,9 @@ const loadFromLocalStorage =()=>{
         <h1>ChatGPT Clone</h1>
         <p>Start a conversation and explore the power of generative AI</p>
         <small>Your chats will be displayed here</small>
+        <p class='credits'>Developed by 
+            <span><a href="https://github.com/sakt-hi" target="_blank">Sakthivel G</span>
+        </p>
     </div>`
 
     const storedChats = localStorage.getItem("all-chats");
