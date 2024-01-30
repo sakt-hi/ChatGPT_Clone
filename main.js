@@ -4,7 +4,7 @@ const chatContainer = document.querySelector('.chat-container');
 const themeButton = document.querySelector('#theme-btn');
 const deleteButton = document.querySelector('#delete-btn');
 
-import OPENAI_API_KEY from "./apikey";
+import OPENAI_API_KEY from "./apikey.js";
 
 let userInput = null;
 const API_KEY = OPENAI_API_KEY;
