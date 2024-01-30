@@ -26,10 +26,10 @@ const loadFromLocalStorage =()=>{
     chatContainer.innerHTML = storedChats || welcomeText;
 
     if (!storedChats) {
-        deleteButton.style.opacity = 0.5;
+        deleteButton.style.display='none';
         deleteButton.disabled = true;
     } else {
-        deleteButton.style.opacity = 1;
+        deleteButton.style.display = 'flex';
         deleteButton.disabled = false;
     }
 
@@ -50,7 +50,7 @@ const getPromptResponse = async(solutionChatDiv)=>{
     const API_URL = "https://api.openai.com/v1/completions";
     const paragraphElement = document.createElement("p");
 
-    deleteButton.style.opacity = 0.5;
+    deleteButton.style.display = 'none';
     deleteButton.disabled = true;
     promptInput.style.opacity=0.5;
     promptInput.disabled = true;
@@ -86,7 +86,7 @@ const getPromptResponse = async(solutionChatDiv)=>{
     solutionChatDiv.querySelector(".chat-details").appendChild(paragraphElement);
     chatContainer.scrollTo(0,chatContainer.scrollHeight);
     localStorage.setItem("all-chats",chatContainer.innerHTML);
-    deleteButton.style.opacity = 1;
+    deleteButton.style.display = 'flex';
     deleteButton.disabled = false;
     promptInput.disabled = false;
     promptInput.style.opacity=1;
