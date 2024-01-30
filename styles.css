@@ -74,6 +74,16 @@ body{
     color: var(--text-color);
 }
 
+.developer-container{
+    display: flex;
+    gap: 1.5rem;
+}
+
+.developer-container span{
+    cursor: pointer;
+    color: var(--icon-color);
+}
+
 .developer{
     display: flex;
     justify-content: space-between;
@@ -173,10 +183,8 @@ body{
 }
 
 .copy-icon{
-    display: flex;
-    font-size: 0.9rem;
+    scale:0.8;
     color: var(--icon-color);
-    gap: 0.1rem;
     visibility: hidden;
     cursor: pointer;
 }
@@ -185,9 +193,6 @@ body{
     visibility: visible;
 }
 
-.copy-icon span{
-    scale: 0.8;
-}
 
 .chat-details{
     display: flex;
@@ -322,10 +327,4 @@ textarea::placeholder{
     margin-left: 0.7rem;
     font-size: 1.4rem;
     border-radius: 0.4rem;
-}
-
-@media screen and (max-width: 425px) {
-    .developer p{
-        display: none;
-    }
 }

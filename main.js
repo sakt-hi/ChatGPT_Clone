@@ -12,8 +12,8 @@ const initialHeight = promptInput.scrollHeight;
 
 const loadFromLocalStorage =()=>{
     const themeType = localStorage.getItem("theme");
-    document.body.classList.toggle("light-mode",themeType==="light_mode");
-    themeButton.innerText = document.body.classList.contains("light-mode") ? "dark_mode" :"light_mode";
+    document.body.classList.toggle("light-mode",themeType==="dark_mode");
+    themeButton.innerText = document.body.classList.contains("light-mode") ? "light_mode" :"dark_mode";
 
     const welcomeText = `<div class='welcome-text'>
         <h6>Welcome to</h6>
@@ -22,8 +22,18 @@ const loadFromLocalStorage =()=>{
         <small>Your chats will be displayed here</small>
     </div>`
 
-    chatContainer.innerHTML = localStorage.getItem("all-chats") || welcomeText;
-    chatContainer.scrollTo(0,chatContainer.scrollHeight);
+    const storedChats = localStorage.getItem("all-chats");
+    chatContainer.innerHTML = storedChats || welcomeText;
+
+    if (!storedChats) {
+        deleteButton.style.opacity = 0.5;
+        deleteButton.disabled = true;
+    } else {
+        deleteButton.style.opacity = 1;
+        deleteButton.disabled = false;
+    }
+
+    chatContainer.scrollTo(0, chatContainer.scrollHeight);
 }
 
 loadFromLocalStorage();
@@ -38,7 +48,12 @@ const createChatElement = (html,className) =>{
 
 const getPromptResponse = async(solutionChatDiv)=>{
     const API_URL = "https://api.openai.com/v1/completions";
-    const paragraphElement = document.createElement("p")
+    const paragraphElement = document.createElement("p");
+
+    deleteButton.style.opacity = 0.5;
+    deleteButton.disabled = true;
+    promptInput.style.opacity=0.5;
+    promptInput.disabled = true;
 
     const apiRequest ={
         method:"POST",
@@ -71,9 +86,13 @@ const getPromptResponse = async(solutionChatDiv)=>{
     solutionChatDiv.querySelector(".chat-details").appendChild(paragraphElement);
     chatContainer.scrollTo(0,chatContainer.scrollHeight);
     localStorage.setItem("all-chats",chatContainer.innerHTML);
+    deleteButton.style.opacity = 1;
+    deleteButton.disabled = false;
+    promptInput.disabled = false;
+    promptInput.style.opacity=1;
 }
 
-const copyResponse =(copyText)=>{
+const copyResponse = (copyText) => {
     const solutionTextElement = copyText.parentElement.querySelector("p");
     navigator.clipboard.writeText(solutionTextElement.textContent)
     copyText.textContent = "done";
@@ -81,6 +100,12 @@ const copyResponse =(copyText)=>{
         copyText.textContent ="content_copy";
     },1000)
 }
+
+document.addEventListener('click', function(event) {
+    if (event.target.classList.contains('copy-icon')) {
+        copyResponse(event.target);
+    }
+});
 
 const showTypingAnimation =()=>{
     const html =
@@ -93,7 +118,7 @@ const showTypingAnimation =()=>{
                 <div class="typing-dot" style="--delay:0.4s"></div>
             </div>
         </div>
-        <span class="material-symbols-outlined copy-icon" onclick="copyResponse(this)">content_copy</span>
+        <span class="material-symbols-outlined copy-icon">content_copy</span>
     </div>`
     const solutionChatDiv = createChatElement(html,"solution");
     chatContainer.appendChild(solutionChatDiv);
@@ -139,7 +164,7 @@ promptInput.addEventListener('keydown',(e)=>{
 const toggleTheme = ()=>{
     document.body.classList.toggle("light-mode");
     localStorage.setItem("theme",themeButton.innerText)
-    themeButton.innerText = document.body.classList.contains("light-mode") ? "dark_mode" :"light_mode"
+    themeButton.innerText = document.body.classList.contains("light-mode") ? "light_mode" :"dark_mode"
 }
 //theme switching
 themeButton.addEventListener('click',toggleTheme);
